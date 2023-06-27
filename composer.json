@@ -1,0 +1,46 @@
+{
+    "name": "pantheon-systems/terminus-scheduled-jobs-plugin",
+    "description": "Configure and manage scheduled jobs via Terminus commands.",
+    "type": "terminus-plugin",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Pantheon\\TerminusScheduledJobs\\": "src",
+            "Pantheon\\TerminusScheduledJobs\\Tests\\": "tests"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9",
+        "squizlabs/php_codesniffer": "^3.6",
+        "pantheon-systems/terminus": "^3.1",
+        "composer/composer": "^2.4",
+        "tm/tooly-composer-script": "^1.4",
+        "kint-php/kint": "^4.2"
+    },
+    "scripts": {
+        "cs": "phpcs --standard=PSR2 -n src tests",
+        "cbf": "phpcbf --standard=PSR2 -n src tests",
+        "lint": "find src -name '*.php' -print0 | xargs -0 -n1 php -l",
+        "syntax": "find src -name '*.php' -print0 | xargs -0 -n1 php -l",
+        "functional": "phpunit --colors=always tests",
+        "test": [
+            "@lint",
+            "@cs",
+            "@functional"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "tools": {
+            "robo": {
+                "url": "https://robo.li/robo.phar",
+                "only-dev": true,
+                "rename": true
+            }
+        },
+        "terminus": {
+            "compatible-version": "^3"
+        }
+    }
+}
