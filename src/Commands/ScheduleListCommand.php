@@ -9,6 +9,7 @@ use Pantheon\Terminus\Site\SiteAwareInterface;
 use Pantheon\Terminus\Site\SiteAwareTrait;
 use Pantheon\Terminus\Exceptions\TerminusException;
 use Pantheon\TerminusScheduledJobs\ScheduledJobsApi\ScheduledJobsClientAwareTrait;
+use Pantheon\Terminus\Exceptions\TerminusNotFoundException;
 
 class ScheduleListCommand extends TerminusCommand implements RequestAwareInterface, SiteAwareInterface
 {
@@ -41,6 +42,9 @@ class ScheduleListCommand extends TerminusCommand implements RequestAwareInterfa
         $env = $this->getEnv($site_env);
         try {
             $rawSchedules = $this->getClient()->listSchedule($env->getSite()->id, $env->id);
+        } catch (TerminusNotFoundException $t) {
+            $this->log()->notice('No schedules found.');
+            return new RowsOfFields([]);
         } catch (\Throwable $t) {
             throw new TerminusException(
                 'Error listing scheduled jobs: {error_message}',

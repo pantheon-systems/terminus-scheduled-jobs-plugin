@@ -8,6 +8,7 @@ use Pantheon\Terminus\Site\SiteAwareInterface;
 use Pantheon\Terminus\Site\SiteAwareTrait;
 use Pantheon\Terminus\Exceptions\TerminusException;
 use Pantheon\TerminusScheduledJobs\ScheduledJobsApi\ScheduledJobsClientAwareTrait;
+use Pantheon\Terminus\Exceptions\TerminusNotFoundException;
 
 class JobLogsCommand extends TerminusCommand implements RequestAwareInterface, SiteAwareInterface
 {
@@ -34,8 +35,7 @@ class JobLogsCommand extends TerminusCommand implements RequestAwareInterface, S
             $job = $this->getClient()->getJob($env->getSite()->id, $env->id, $job_id);
             if (empty($job) || empty($job["external_id"])) {
                 throw new TerminusException(
-                    'Error retrieving logs: {error_message}',
-                    ['error_message' => 'Job not found or logs not available.']
+                    'Error retrieving logs: job not found or logs not available.'
                 );
             }
             $logs = $this->getClient()->getLogs($env->getSite()->id, $env->id, $job["external_id"]);
@@ -43,6 +43,9 @@ class JobLogsCommand extends TerminusCommand implements RequestAwareInterface, S
             if (is_array($logs) && !empty($logs[0])) {
                 print($logs[0]);
             }
+        } catch (TerminusNotFoundException $t) {
+            $this->log()->notice('Job not found or logs not available.');
+            return;
         } catch (\Throwable $t) {
             throw new TerminusException(
                 'Error retrieving logs: {error_message}',
