@@ -33,7 +33,7 @@ Job schedules are characterized as job definitions which allow setting a name fo
 Creating a new schedule can be performed running the command below. The given example runs an hourly job executing Drupal cron:
 
 ```bash
-terminus scheduledjobs:create $SITE_NAME.$ENVIRONMENT "test-scheduled-job-hourly" "drush -vvv cron" "0 * * * *"
+terminus scheduledjobs:schedule:create $SITE_NAME.$ENVIRONMENT "test-scheduled-job-hourly" "drush -vvv cron" "0 * * * *"
 ```
 
 #### Listing schedules
