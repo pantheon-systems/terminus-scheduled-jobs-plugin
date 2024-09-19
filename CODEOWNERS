@@ -1,4 +1,4 @@
 # https://help.github.com/en/articles/about-code-owners
 
 # TODO: when you fork this repo to make a service you should update this to the team that owns the service:
-@pantheon-systems/cmsi
+@pantheon-systems/pie
