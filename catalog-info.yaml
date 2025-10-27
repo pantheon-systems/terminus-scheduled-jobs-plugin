@@ -1,0 +1,16 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: terminus-scheduled-jobs-plugin
+  description: Terminus plugin for scheduling and managing jobs on Pantheon sites.
+  annotations:
+    github.com/project-slug: pantheon-systems/terminus-scheduled-jobs-plugin
+  links:
+    - title: GitHub Repository
+      url: https://github.com/pantheon-systems/terminus-scheduled-jobs-plugin
+spec:
+  type: plugin
+  lifecycle: beta
+  owner: pie
+  system: platform
