@@ -39,6 +39,6 @@ class SchedulePauseCommand extends TerminusCommand implements RequestAwareInterf
                 ['error_message' => $t->getMessage()]
             );
         }
-        $this->log()->success('Scheduled job successfully paused.');
+        $this->log()->notice('Scheduled job successfully paused.');
     }
 }

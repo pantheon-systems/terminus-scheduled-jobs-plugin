@@ -32,7 +32,8 @@ class ScheduleCreateCommand extends TerminusCommand implements RequestAwareInter
      *
      * @throws \Pantheon\Terminus\Exceptions\TerminusException
      */
-    public function create(string $site_env, string $name, string $cmd, string $schedule): void {
+    public function create(string $site_env, string $name, string $cmd, string $schedule): void
+    {
         $env = $this->getEnv($site_env);
         try {
             $this->getClient()->createSchedule($env->getSite()->id, $env->id, $name, $cmd, $schedule);
@@ -42,6 +43,6 @@ class ScheduleCreateCommand extends TerminusCommand implements RequestAwareInter
                 ['error_message' => $t->getMessage()]
             );
         }
-        $this->log()->success('Scheduled job successfully created.');
+        $this->log()->notice('Scheduled job successfully created.');
     }
 }

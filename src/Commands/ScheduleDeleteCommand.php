@@ -39,6 +39,6 @@ class ScheduleDeleteCommand extends TerminusCommand implements RequestAwareInter
                 ['error_message' => $t->getMessage()]
             );
         }
-        $this->log()->success('Scheduled job successfully deleted.');
+        $this->log()->notice('Scheduled job successfully deleted.');
     }
 }
