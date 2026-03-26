@@ -39,6 +39,6 @@ class ScheduleResumeCommand extends TerminusCommand implements RequestAwareInter
                 ['error_message' => $t->getMessage()]
             );
         }
-        $this->log()->success('Scheduled job successfully resumed.');
+        $this->log()->notice('Scheduled job successfully resumed.');
     }
 }

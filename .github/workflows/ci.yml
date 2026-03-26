@@ -5,6 +5,9 @@ on:
 jobs:
   checkout_build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: write
     container:
       image: quay.io/pantheon-public/php-ci:v7.4
     name: Checkout & Lint
@@ -22,6 +25,8 @@ jobs:
         run: composer lint
   phpcompatibility:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     name: PHP Compatibility
     steps:
       - name: Checkout
@@ -34,6 +39,9 @@ jobs:
 
   functional:
     runs-on: ${{ matrix.operating-system }}
+    permissions:
+      contents: read
+      actions: read
     name: Functional testing matrix - PHP ${{ matrix.php-versions }} on ${{ matrix.operating-system }}
     if: ${{ github.repository_owner == 'pantheon-systems' }}
     strategy:
