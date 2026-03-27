@@ -85,5 +85,5 @@ jobs:
         with:
           pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
           terminus-version: ${{ env.TERMINUS_VERSION }}
-      - name: Run functional tests
-        run: composer functional
+      - name: Run e2e tests
+        run: bash "${GITHUB_WORKSPACE}/.github/e2e.sh"
