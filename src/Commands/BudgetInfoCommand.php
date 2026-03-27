@@ -35,7 +35,7 @@ class BudgetInfoCommand extends TerminusCommand implements RequestAwareInterface
      */
     public function budgetInfo(string $site_id)
     {
-        $site = $this->getSite($site_id);
+        $site = $this->getSiteById($site_id);
         try {
             $budgetInfo = $this->getClient()->budgetInfo($site->id);
         } catch (\Throwable $t) {
