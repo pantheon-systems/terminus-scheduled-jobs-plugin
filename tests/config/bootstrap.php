@@ -73,6 +73,4 @@ if ($token) {
             $token
         )
     );
-    // Install the plugin.
-    exec(sprintf('%s self:plugin:install .', TERMINUS_BIN_FILE));
 }
