@@ -40,15 +40,14 @@ jobs:
           paths: ${{ github.workspace }}/src
 
   functional:
-    runs-on: ${{ matrix.operating-system }}
+    runs-on: 'ubuntu-latest'
     permissions:
       contents: read
       actions: read
-    name: Functional testing matrix - PHP ${{ matrix.php-versions }} on ${{ matrix.operating-system }}
+    name: Functional testing matrix - PHP ${{ matrix.php-versions }}, Terminus ${{ matrix.terminus-version }}
     if: ${{ github.repository_owner == 'pantheon-systems' }}
     strategy:
       matrix:
-        operating-system: [ 'ubuntu-latest' ]
         php-versions: [ '7.4', '8.1', '8.2', '8.3', '8.4' ]
         terminus-version: [ '3.6.2', '4.1.7' ]
         exclude:
@@ -86,4 +85,4 @@ jobs:
           pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
           terminus-version: ${{ env.TERMINUS_VERSION }}
       - name: Run e2e tests
-        run: bash "${GITHUB_WORKSPACE}/.github/e2e.sh"
+        run: bash .github/e2e.sh
