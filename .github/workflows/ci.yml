@@ -51,6 +51,11 @@ jobs:
         operating-system: [ 'macos-latest' ]
         php-versions: [ '7.4', '8.1', '8.2', '8.3', '8.4' ]
         terminus-version: [ '3.1.1', '4.1.7' ]
+        exclude:
+          - php-versions: '7.4'
+            terminus-version: '4.1.7'
+          - php-versions: '8.1'
+            terminus-version: '4.1.7'
       max-parallel: 3
     env:
       TERMINUS_TOKEN: ${{ secrets.TERMINUS_TOKEN }}
