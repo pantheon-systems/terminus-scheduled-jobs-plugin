@@ -8,19 +8,14 @@
       <directory suffix="Test.php">tests/Functional/</directory>
     </testsuite>
   </testsuites>
-  <coverage
-          processUncoveredFiles="true"
-          cacheDirectory="reports">
+  <coverage cacheDirectory="reports">
     <include>
       <directory suffix="Command.php">src/Commands</directory>
     </include>
   </coverage>
-  <logging>
-    <testdoxXml outputFile="reports/logfile.xml"/>
-  </logging>
   <php>
     <server   name="TERMINUS_TOKEN"                 value="${TERMINUS_TOKEN}" />
     <server   name="TERMINUS_SITE"                  value="${TERMINUS_SITE}" />
-    <server   name="TERMINUS_TESTING_RUNTIME_ENV"   value="${TERMINUS_TESTING_RUNTIME_ENV" />
+    <server   name="TERMINUS_TESTING_RUNTIME_ENV"   value="${TERMINUS_TESTING_RUNTIME_ENV}" />
   </php>
 </phpunit>
