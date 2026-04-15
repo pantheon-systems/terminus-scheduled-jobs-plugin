@@ -28,16 +28,16 @@ class BudgetInfoCommand extends TerminusCommand implements RequestAwareInterface
      *     remaining_budget: Daily Budget Remaining
      *     resets_in: Resets In
      *
-     * @param string $site_id Either a site's UUID or its name or site_env.
+     * @param string $site_env Site & environment in the format `site-name.env`
      * @return RowsOfFields
      *
      * @throws \Pantheon\Terminus\Exceptions\TerminusException
      */
-    public function budgetInfo(string $site_id)
+    public function budgetInfo(string $site_env)
     {
-        $site = $this->getSite($site_id);
+        $env = $this->getEnv($site_env);
         try {
-            $budgetInfo = $this->getClient()->budgetInfo($site->id);
+            $budgetInfo = $this->getClient()->budgetInfo($env->getSite()->id);
         } catch (\Throwable $t) {
             throw new TerminusException(
                 'Error listing budget info: {error_message}',
