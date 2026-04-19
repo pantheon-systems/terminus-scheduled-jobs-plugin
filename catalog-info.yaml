@@ -12,5 +12,5 @@ metadata:
 spec:
   type: plugin
   lifecycle: beta
-  owner: pie
+  owner: platform-infrastructure-engineering
   system: platform
