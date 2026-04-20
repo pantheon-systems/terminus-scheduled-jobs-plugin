@@ -18,15 +18,29 @@
         "kint-php/kint": "^4.2"
     },
     "scripts": {
+        "post-install-cmd": "Tooly\\ScriptHandler::installPharTools",
+        "post-update-cmd": "Tooly\\ScriptHandler::installPharTools",
         "cs": "phpcs --standard=PSR2 -n src tests",
         "cbf": "phpcbf --standard=PSR2 -n src tests",
-        "lint": "find src -name '*.php' -print0 | xargs -0 -n1 php -l",
         "syntax": "find src -name '*.php' -print0 | xargs -0 -n1 php -l",
-        "functional": "phpunit --colors=always tests",
+        "lint": [
+            "@syntax",
+            "@cbf",
+            "@cs"
+        ],
+        "setup": [
+            "robo test:set-up"
+        ],
+        "teardown": [
+            "robo test:tear-down"
+        ],
+        "unit": [
+            "@setup",
+            "phpunit --colors=always tests",
+            "@teardown"
+        ],
         "test": [
-            "@lint",
-            "@cs",
-            "@functional"
+            "@unit"
         ]
     },
     "minimum-stability": "dev",
