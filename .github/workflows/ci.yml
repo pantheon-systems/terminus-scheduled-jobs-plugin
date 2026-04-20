@@ -42,7 +42,7 @@ jobs:
     permissions:
       contents: read
       actions: read
-    name: Functional testing matrix - PHP ${{ matrix.php-versions }} on ${{ matrix.operating-system }}
+    name: Functional testing matrix - PHP ${{ matrix.php-versions }} on ${{ matrix.operating-system }} with Terminus ${{ matrix.terminus-versions }}
     if: ${{ github.repository_owner == 'pantheon-systems' }}
     strategy:
       matrix:
@@ -72,12 +72,12 @@ jobs:
           extensions: gd, mbstring, zip, ssh2-1.3.1, pcov
           coverage: pcov
           ini-values: error_reporting=E_ALL
+      - name: Full Composer Install
+        run: composer install
       - name: Install Terminus
         uses: pantheon-systems/terminus-github-actions@8e024bd89ff46ed2aa4e0663c6b54c87a94344f8 # main 2025-04-25T19:40:25Z
         with:
           pantheon-machine-token: ${{ env.TERMINUS_TOKEN }}
           terminus-version: ${{ env.TERMINUS_VERSION }}
-      - name: Full Composer Install
-        run: composer install
       - name: Run functional tests
         run: composer functional
