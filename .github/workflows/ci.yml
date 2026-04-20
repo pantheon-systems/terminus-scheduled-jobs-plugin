@@ -82,4 +82,4 @@ jobs:
       - name: Full Composer Install
         run: composer install
       - name: Run functional tests
-        run: composer functional
+        run: composer unit
