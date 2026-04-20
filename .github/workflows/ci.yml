@@ -37,7 +37,6 @@ jobs:
         with:
           test-versions: 7.4-8.3
           paths: ${{ github.workspace }}/src
-
   functional:
     runs-on: ${{ matrix.operating-system }}
     permissions:
@@ -81,4 +80,4 @@ jobs:
       - name: Full Composer Install
         run: composer install
       - name: Run functional tests
-        run: composer unit
+        run: composer functional

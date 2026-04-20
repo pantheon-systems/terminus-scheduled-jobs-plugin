@@ -38,7 +38,7 @@
             "phpunit --colors=always tests",
             "@teardown"
         ],
-        "test": [
+        "functional": [
             "@unit"
         ]
     },
