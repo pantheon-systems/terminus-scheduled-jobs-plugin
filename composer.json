@@ -13,12 +13,9 @@
         "phpunit/phpunit": "^9.6.34",
         "squizlabs/php_codesniffer": "^3.13.5",
         "pantheon-systems/terminus": "^3.6.2",
-        "tm/tooly-composer-script": "^1.4.1",
         "kint-php/kint": "^4.2.3"
     },
     "scripts": {
-        "post-install-cmd": "Tooly\\ScriptHandler::installPharTools",
-        "post-update-cmd": "Tooly\\ScriptHandler::installPharTools",
         "cs": "phpcs --standard=PSR2 -n src tests",
         "cbf": "phpcbf --standard=PSR2 -n src tests",
         "syntax": "find src -name '*.php' -print0 | xargs -0 -n1 php -l",
@@ -27,16 +24,8 @@
             "@cbf",
             "@cs"
         ],
-        "setup": [
-            "robo test:set-up"
-        ],
-        "teardown": [
-            "robo test:tear-down"
-        ],
         "unit": [
-            "@setup",
-            "phpunit --colors=always tests",
-            "@teardown"
+            "phpunit --colors=always tests"
         ],
         "functional": [
             "@unit"
@@ -45,13 +34,6 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "extra": {
-        "tools": {
-            "robo": {
-                "url": "https://robo.li/robo.phar",
-                "only-dev": true,
-                "rename": true
-            }
-        },
         "terminus": {
             "compatible-version": "^3 || ^4"
         }
