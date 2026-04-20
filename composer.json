@@ -42,5 +42,10 @@
         "terminus": {
             "compatible-version": "^3"
         }
+    },
+    "config": {
+        "audit": {
+            "block-insecure": false
+        }
     }
 }
