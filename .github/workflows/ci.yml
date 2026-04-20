@@ -1,5 +1,8 @@
-name: Terminus 3.x Plugins Test & Build
+name: Test & Build
 on:
+  push:
+    branches:
+      - main
   pull_request:
 
 jobs:
