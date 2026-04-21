@@ -6,7 +6,7 @@ This plugin allows scheduling jobs on the Pantheon platform. Due to the private 
 
 ### Installation
 
-The only requirement is terminus itself, version 3.x. To install the plugin, the current repository needs to be cloned locally, followed by the execution of the following command:
+The only requirement is terminus itself, version 3.x or 4.x. To install the plugin, the current repository needs to be cloned locally, followed by the execution of the following command:
 
 ```bash
 terminus self:plugin:install $PATH_TO_LOCAL_CLONE
@@ -104,7 +104,7 @@ terminus scheduledjobs:budget:info $SITE_NAME.$ENVIRONMENT
 ---------------------- ------------------------ -----------
  Daily Budget Elapsed   Daily Budget Remaining   Resets In
 ---------------------- ------------------------ -----------
- 100m                   200m                     16h11m29s
+ 0s                     18000s                   6h31m3s
 ---------------------- ------------------------ -----------
 ```
 
