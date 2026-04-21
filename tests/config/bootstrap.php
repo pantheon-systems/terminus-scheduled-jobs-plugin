@@ -7,9 +7,9 @@
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
-$project_root = dirname(basename(__DIR__));
+$project_root = dirname(dirname(__DIR__));
 
-include_once $project_root . '/vendor/pantheon-systems/terminus/vendor/autoload.php';
+include_once $project_root . '/vendor/autoload.php';
 
 // create a log channel
 global $log;
@@ -62,7 +62,7 @@ if (empty($token)) {
     }
 }
 
-const TERMINUS_BIN_FILE = 'terminus';
+define('TERMINUS_BIN_FILE', getenv('TERMINUS_BIN_FILE') ?: 'terminus');
 
 if ($token) {
     // Auth with the token.

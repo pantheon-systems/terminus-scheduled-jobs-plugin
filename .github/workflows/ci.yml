@@ -79,5 +79,9 @@ jobs:
         with:
           pantheon-machine-token: ${{ env.TERMINUS_TOKEN }}
           terminus-version: ${{ env.TERMINUS_VERSION }}
+      - name: Save Terminus path
+        run: echo "TERMINUS_BIN_FILE=$(which terminus)" >> $GITHUB_ENV
+      - name: Install Plugin to Terminus
+        run: $TERMINUS_BIN_FILE self:plugin:install $(pwd)
       - name: Run functional tests
         run: composer functional
