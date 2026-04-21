@@ -62,8 +62,7 @@ class ClientTest extends TestCase
                     $opts['method'] === 'PUT' &&
                     $opts['json']['name'] === 'my-job' &&
                     $opts['json']['command'] === 'drush cr' &&
-                    $opts['json']['schedule'] === '0 * * * *'
-                )
+                    $opts['json']['schedule'] === '0 * * * *')
             )
             ->willReturn($this->makeResult(200, []));
 
@@ -189,8 +188,7 @@ class ClientTest extends TestCase
                 $this->anything(),
                 $this->callback(fn($opts) =>
                     isset($opts['headers']['Authorization']) &&
-                    $opts['headers']['Authorization'] === 'Bearer ' . self::TOKEN
-                )
+                    $opts['headers']['Authorization'] === 'Bearer ' . self::TOKEN)
             )
             ->willReturn($this->makeResult(200, []));
 
