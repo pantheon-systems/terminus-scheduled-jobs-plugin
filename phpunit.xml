@@ -4,23 +4,13 @@
          bootstrap="./tests/config/bootstrap.php"
          colors="true">
   <testsuites>
-    <testsuite name="functional">
-      <directory suffix="Test.php">tests/Functional/</directory>
+    <testsuite name="unit">
+      <directory suffix="Test.php">tests/Unit/</directory>
     </testsuite>
   </testsuites>
-  <coverage
-          processUncoveredFiles="true"
-          cacheDirectory="reports">
+  <coverage processUncoveredFiles="true" cacheDirectory="reports">
     <include>
-      <directory suffix="Command.php">src/Commands</directory>
+      <directory suffix=".php">src/</directory>
     </include>
   </coverage>
-  <logging>
-    <testdoxXml outputFile="reports/logfile.xml"/>
-  </logging>
-  <php>
-    <server   name="TERMINUS_TOKEN"                 value="${TERMINUS_TOKEN}" />
-    <server   name="TERMINUS_SITE"                  value="${TERMINUS_SITE}" />
-    <server   name="TERMINUS_TESTING_RUNTIME_ENV"   value="${TERMINUS_TESTING_RUNTIME_ENV" />
-  </php>
 </phpunit>

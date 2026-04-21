@@ -96,7 +96,7 @@ The private beta nature of this feature comes with a quota defined at the site l
 
 ### Job Budget
 
-Each site has a fixed allocated budget of 300 minutes per day. This is calculated as the sum of all job durations, from the moment the job has started until it finished. There are currently no restrictions around the number of schedules that can be created for any given site. If the daily budget is exhausted, running jobs are given a 15 minute grace period after which a timeout signal will be issued. No other jobs will be created that day until midnight UTC when all budgets are reset. In calculating the budget, partial minutes are rounded up.
+Each site has a fixed allocated budget of 18000 seconds (300 minutes) per day measured by the second. This is calculated as the sum of all job durations, from the moment the job has started until it finished. There are currently no restrictions around the number of schedules that can be created for any given site. If the daily budget is exhausted, running jobs are given a 15 minute grace period after which a timeout signal will be issued. No other jobs will be created that day until midnight UTC when all budgets are reset. In calculating the budget, partial minutes are rounded up.
 
 ```bash
 terminus scheduledjobs:budget:info $SITE_NAME.$ENVIRONMENT
