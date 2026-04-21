@@ -3,7 +3,6 @@
 namespace Pantheon\TerminusScheduledJobs\ScheduledJobsApi;
 
 use Pantheon\Terminus\Request\RequestAwareTrait;
-use Pantheon\TerminusScheduledJobs\Tests\Functional\Mocks\RequestMock;
 
 /**
  * Class ScheduledJobsClientAwareTrait.
