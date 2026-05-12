@@ -73,7 +73,7 @@ jobs:
           php-version: '8.3'
           tools: composer
       - name: Install Terminus
-        uses: pantheon-systems/terminus-github-actions@main
+        uses: pantheon-systems/terminus-github-actions@409451ede17f75acac08f42edc823fee6c435057 # main
         with:
           pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
       - name: Install plugin
