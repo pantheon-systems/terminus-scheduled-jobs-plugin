@@ -57,3 +57,28 @@ jobs:
     needs:
       - lint-php
       - phpcompatibility
+
+  e2e:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    name: E2E Tests
+    needs:
+      - unit
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Setup PHP
+        uses: shivammathur/setup-php@44454db4f0199b8b9685a5d763dc37cbf79108e1 # v2
+        with:
+          php-version: '8.3'
+          tools: composer
+      - name: Install Terminus
+        uses: pantheon-systems/terminus-github-actions@409451ede17f75acac08f42edc823fee6c435057 # main
+        with:
+          pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
+      - name: Install plugin
+        run: terminus self:plugin:install "${{ github.workspace }}"
+      - name: Run E2E tests
+        env:
+          E2E_SITE_ENV: ${{ secrets.E2E_SITE_ENV }}
+        run: bash e2e/test.sh
