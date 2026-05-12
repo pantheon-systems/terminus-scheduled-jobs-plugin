@@ -4,7 +4,7 @@ set -euo pipefail
 SITE_ENV="${E2E_SITE_ENV}"
 SCHEDULE_NAME="e2e-test-${GITHUB_RUN_ID:-$(date +%s)}"
 SCHEDULE_CMD="echo e2e-test"
-SCHEDULE_CRON="0 0 31 2 *"  # Feb 31 — never fires
+SCHEDULE_CRON="0 0 1 1 *"  # Jan 1st at midnight — valid but fires at most once a year
 SCHEDULE_ID=""
 
 cleanup() {
