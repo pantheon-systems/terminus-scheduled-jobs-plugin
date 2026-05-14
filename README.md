@@ -2,11 +2,11 @@
 
 ## Scheduled Jobs
 
-This plugin allows scheduling jobs on the Pantheon platform. Due to the private beta status, the feature is only enabled upon request on a site by site basis. Each job runs in its own container with access to both the database and distributed file system. For now, other features such as access to the New Relic agent or secure integration are not available.
+This plugin allows scheduling jobs on the Pantheon platform. Each job runs in its own container with access to both the database and distributed file system. For now, other features such as access to the New Relic agent or secure integration are not available.
 
 ### Installation
 
-The only requirement is terminus itself, version 3.x or 4.x. To install the plugin, the current repository needs to be cloned locally, followed by the execution of the following command:
+The only requirement is terminus 4.x. To install the plugin, the current repository needs to be cloned locally, followed by the execution of the following command:
 
 ```bash
 terminus self:plugin:install $PATH_TO_LOCAL_CLONE
@@ -92,11 +92,11 @@ terminus scheduledjobs:job:logs $SITE_NAME.$ENVIRONMENT $JOB_ID
 
 ## Quotas and further considerations
 
-The private beta nature of this feature comes with a quota defined at the site level as a daily runtime budget.
+This feature comes with a quota defined at the site level as a daily runtime budget.
 
 ### Job Budget
 
-Each site has a fixed allocated budget of 18000 seconds (300 minutes) per day measured by the second. This is calculated as the sum of all job durations, from the moment the job has started until it finished. There are currently no restrictions around the number of schedules that can be created for any given site. If the daily budget is exhausted, running jobs are given a 15 minute grace period after which a timeout signal will be issued. No other jobs will be created that day until midnight UTC when all budgets are reset. In calculating the budget, partial minutes are rounded up.
+Each site has a fixed allocated budget of 18000 seconds (300 minutes) per day measured by the second. This is calculated as the sum of all job durations, from the moment the job has started until it finished. There are currently no restrictions around the number of schedules that can be created for any given site. If the daily budget is exhausted, running jobs are given a 15 minute grace period after which a timeout signal will be issued. No other jobs will be created that day until midnight UTC when all budgets are reset.
 
 ```bash
 terminus scheduledjobs:budget:info $SITE_NAME.$ENVIRONMENT
