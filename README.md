@@ -28,18 +28,31 @@ Job schedules are characterized as job definitions which allow setting a name fo
 # * * * * * <command to execute>
 ```
 
-#### Creating a new schedule
+## Commands
+
+### `schedule:create`
 
 Creating a new schedule can be performed running the command below. The given example runs an hourly job executing Drupal cron:
 
 ```bash
-terminus scheduledjobs:schedule:create $SITE_NAME.$ENVIRONMENT "test-scheduled-job-hourly" "drush -vvv cron" "0 * * * *"
+terminus scheduledjobs:schedule:create <site>.<env> "test-scheduled-job-hourly" "drush -vvv cron" "0 * * * *"
 ```
 
-#### Listing schedules
+### `schedule:delete`
+
+Delete an existing schedule.
+
 
 ```bash
-terminus scheduledjobs:schedule:list $SITE_NAME.$ENVIRONMENT
+terminus scheduledjobs:schedule:delete <site>.<env> <schedule_ID>
+```
+
+### `schedule:list`
+
+List all schedules for the specified site environment. 
+
+```bash
+terminus scheduledjobs:schedule:list <site>.<env>
 
 -------------------------------------- --------------------------- ------------- ---------------------------------- --------- ----------------------
  ID                                     Name                        Schedule      Command                            Status    Created At (UTC)
@@ -48,27 +61,28 @@ terminus scheduledjobs:schedule:list $SITE_NAME.$ENVIRONMENT
 -------------------------------------- --------------------------- ------------- ---------------------------------- --------- ----------------------
 ```
 
-#### Pausing / resuming schedules
+### `schedule:pause`
 
-At any point, job executions can either be paused or resumed.
+Pause a schedule.
 
 ```bash
-terminus scheduledjobs:schedule:pause $SITE_NAME.$ENVIRONMENT $SCHEDULE_ID
-terminus scheduledjobs:schedule:resume $SITE_NAME.$ENVIRONMENT $SCHEDULE_ID
+terminus scheduledjobs:schedule:pause <site>.<env> <schedule_ID>
 ```
 
-#### Deleting schedules
+### `schedule:resume`
+
+Resume a paused schedule
 
 ```bash
-terminus scheduledjobs:schedule:delete $SITE_NAME.$ENVIRONMENT $SCHEDULE_ID
+terminus scheduledjobs:schedule:resume <site>.<env> <schedule_ID>
 ```
 
-### Jobs
+### `job:list`
 
-Jobs are defined as individual executions associated with a certain schedule. Listing jobs involves obtaining the schedule id.
+Return a list of all active jobs. Requires the schedule ID.
 
 ```bash
-terminus scheduledjobs:job:list $SITE_NAME.$ENVIRONMENT $SCHEDULE_ID
+terminus scheduledjobs:job:list <site>.<env> <schedule_ID>
 
 -------------------------------------- ------------------------------- ------------------------------- ---------
  ID                                     Start Time                      End Time                        Status
@@ -82,24 +96,22 @@ terminus scheduledjobs:job:list $SITE_NAME.$ENVIRONMENT $SCHEDULE_ID
 -------------------------------------- ------------------------------- ------------------------------- ---------
 ```
 
-### Logs
+### `job:logs`
 
-Viewing logs associated with jobs is possible by passing the job ID to the command below:
+View logs associated with a given job. Requires the job ID from `job:list`.
 
 ```bash
-terminus scheduledjobs:job:logs $SITE_NAME.$ENVIRONMENT $JOB_ID
+terminus scheduledjobs:job:logs <site>.<env> <job_ID>
 ```
 
-## Quotas and further considerations
+### `budget:info`
 
-This feature comes with a quota defined at the site level as a daily runtime budget.
-
-### Job Budget
+The Pantheon Scheduled Cron Jobs feature comes with a quota defined at the site level as a daily runtime budget.
 
 Each site has a fixed allocated budget of 18000 seconds (300 minutes) per day measured by the second. This is calculated as the sum of all job durations, from the moment the job has started until it finished. There are currently no restrictions around the number of schedules that can be created for any given site. If the daily budget is exhausted, running jobs are given a 15 minute grace period after which a timeout signal will be issued. No other jobs will be created that day until midnight UTC when all budgets are reset.
 
 ```bash
-terminus scheduledjobs:budget:info $SITE_NAME.$ENVIRONMENT
+terminus scheduledjobs:budget:info <site>.<env>
 
 ---------------------- ------------------------ -----------
  Daily Budget Elapsed   Daily Budget Remaining   Resets In
@@ -108,10 +120,10 @@ terminus scheduledjobs:budget:info $SITE_NAME.$ENVIRONMENT
 ---------------------- ------------------------ -----------
 ```
 
-### Job Timeout
+##s Job Timeouts
 
 Timeouts are dynamic and dependent on the remaining budget plus a grace period. For instance, the daily available budget at the start of the day is 300 minutes, which means the first job's timeout is 315 minutes. When a job is launched throughout the day and the remaining budget is 60 minutes, the timeout will be calculated to 75 minutes.
 
-### Email
+## Email
 
 Sending email via `sendmail` or `localhost` SMTP is not permitted. Email can still be sent via integrations with third party email providers either via their SMTP servers or API integrations.
