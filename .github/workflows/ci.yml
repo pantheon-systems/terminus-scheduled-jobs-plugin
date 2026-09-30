@@ -14,7 +14,7 @@ jobs:
     name: Lint
     steps:
       - name: Checkout
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Setup PHP
         uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:
@@ -28,7 +28,7 @@ jobs:
     name: PHP Compatibility
     steps:
       - name: Checkout
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Setup PHP
         uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:
@@ -36,7 +36,7 @@ jobs:
       - name: Full Composer Install
         run: composer install
       - name: PHPCompatibility
-        uses: pantheon-systems/phpcompatibility-action@7bf1b2881e207c80ad4569874ceee225f59537d1 # v1.1.1
+        uses: pantheon-systems/phpcompatibility-action@6bcfb79e78f644a471e856a1e92e14148a8e4017 # v1.1.4
         with:
           test-versions: 7.4-8.3
           paths: ${{ github.workspace }}/src
@@ -45,7 +45,7 @@ jobs:
     name: Unit Tests
     steps:
       - name: Checkout
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Setup PHP
         uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:
@@ -66,14 +66,14 @@ jobs:
       - unit
     steps:
       - name: Checkout
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Setup PHP
         uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:
           php-version: '8.3'
           tools: composer
       - name: Install Terminus
-        uses: pantheon-systems/terminus-github-actions@409451ede17f75acac08f42edc823fee6c435057 # main
+        uses: pantheon-systems/terminus-github-actions@8fb365801c4abd633407f65ecb475a540ddb38f1 # main
         with:
           pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
       - name: Install plugin
